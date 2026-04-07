@@ -1,0 +1,29 @@
+server: 8080
+
+spring:
+  application:
+    name: apigateway
+  
+  cloud: 
+    compatibility-verifier:
+      enabled: false
+    gateway:
+      routes:
+        - id: api1
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api1/**
+          filters:
+            - StripPrefix=1
+        - id: api2
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api2/**
+          filters:
+            - StripPrefix=1
+
+
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
